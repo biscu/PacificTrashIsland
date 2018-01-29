@@ -6,33 +6,37 @@
 // Edited Video: https://www.youtube.com/watch?v=UcdigVaIYAk
 
 particles = [];
-//var letters = ['A','B','C','D','E','F','G','H','I','L','M','N','O','P','Q','R','S','T','U','V','Z','1','2','3','4','5','6','7','8','9','0','è','@','#','ù']
-
-var s = "ABCDE"
-         //E F G H I L M N O P Q R S T U V Z 1 2 3 4 5 6 7 8 9 0 ? é + @ # §];
-var counter = 0;
+var s = ['A','B','C'];
+//'D','E','F','G','H','I','L','M','N','O','P','Q','R','S','T','U','V','Z','1','2','3','4','5','6','7','8','9','0','è','@','#','ù'
+var c= 0;
+//var s = 'ABCDEFG';
+//FGHILMNOPQRSTUVZ1234567890?é+@#§";
+//var counter = 0;
 //var myStrArr = splitTokens(s, '');
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
     background(0);
-    //frameRate(20);
+    frameRate(10);
     
 }
 
 function draw() {
   background(0);
   //for (let i = 0; i < 5; i++) {
-    let p = new Particle();
+    var p = new Particle();
     particles.push(p);
  // }
-  for (let i = particles.length - 1; i >= 50; i--) {
+  for (var i = 0; i< particles.length; i++) {
     
     particles[i].show();
       particles[i].update();
-      if (keyIsPressed == true){
-       particles.splice(0,1);
-      }
+    
+      
+//      if (keyIsPressed == true){
+//          //if (counter = 0){
+//       particles.splice(0,1);
+//      }
 //      if (keyIsPressed == true){
 //          if (key == 'a'){
 //          particles[i].keyPressed();
@@ -42,7 +46,7 @@ function draw() {
 //      particles.splice(i, 1);
 //    }
   }
-    
+    //mousePressed();
 }
 
 class Particle {
@@ -52,11 +56,14 @@ class Particle {
     this.y = mouseY;
     this.vx = random(-1, 1);
     this.vy = random(-1, 1);
-      this.letter = s.charAt(counter); 
+      this.letter = s[c]; 
       this.size = random(10,60);
       this.z = random (0,360);
       this.vz = random (-0.1,0.1);
-      
+      c++;
+      if (c>=s.length){
+          c=0;
+      }
     //this.alpha = 255;
   }
 
@@ -92,18 +99,21 @@ class Particle {
     rotate(this.z);
   text(this.letter, 0,0);
       pop();
-  counter +=1;
-  
-  if(counter >= s.length){
-    counter = 0;}
-
-   
-       }
-//keyPressed() {
-//       particles.splice(i,1);
-// // return // prevent any default behaviour
+//  counter += 1;
+//  
+//  if(counter >= s.length){
+//    counter = 0;}
 //
-//      
-//  }
+     }
+
 
 }
+function keyTyped() {
+    if (key == 'a'){
+        for (var i = 0; i< particles.length; i++) {
+        // if (particles[i].letter=key){
+       particles.splice(i+2,1);
+    // }
+}}
+ // return // prevent any default behaviour
+  }
